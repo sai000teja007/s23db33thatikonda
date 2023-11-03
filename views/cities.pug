@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  
+  - let result = [{ cityname: "New York", citypopulation : "8,804,190", cityrevenue: "$92.3 billion"},{cityname: "Los Angeles", citypopulation: "3,898,747", cityrevenue: "$37.2 billion"},{cityname: "Chicago", citypopulation: "2,693,959", cityrevenue: "$11.1 billion"}] 
+  script.
+    function buy(num){
+      alert("You purchased items " + (num+1));
+      }
+
+  div.container-fluid
+    div.row
+        each cities, num in result
+            div.col-sm-2(onClick = `buy(${num})`)
+                p cityName: #{cities.cityname}
+                p citypopulation : #{cities.citypopulation}
+                p cityrevenue  : #{cities.cityrevenue}
