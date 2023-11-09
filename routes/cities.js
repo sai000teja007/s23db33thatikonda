@@ -1,9 +1,6 @@
 var express = require('express');
+const cities_controlers= require('../controllers/cities');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('cities', { title: 'search results cities' });
-});
-
+/* GET cities */
+router.get('/', cities_controlers.cities_view_all_Page );
 module.exports = router;

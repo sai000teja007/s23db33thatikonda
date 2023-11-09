@@ -31,4 +31,17 @@ exports.cities_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+// VIEWS
+// Handle a show all view
+exports.cities_view_all_Page = async function(req, res) {
+    try{
+    thecitiess = await cities.find();
+    res.render('cities', { title: 'Cities Search Results', results: thecitiess });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+};
     
