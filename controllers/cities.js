@@ -19,3 +19,16 @@ res.send('NOT IMPLEMENTED: cities delete DELETE ' + req.params.id);
 exports.cities_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: cities update PUT' + req.params.id);
 };
+
+// List of all cities
+exports.cities_list = async function(req, res) {
+    try{
+    thecities = await cities.find();
+    res.send(thecities);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+    
