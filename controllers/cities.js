@@ -11,10 +11,19 @@ res.send('NOT IMPLEMENTED: cities detail: ' + req.params.id);
 exports.cities_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: cities create POST');
 };
-// Handle City delete form on DELETE.
-exports.cities_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: cities delete DELETE ' + req.params.id);
+// Handle Costume delete on DELETE.
+exports.cities_delete = async function(req, res) {
+console.log("delete " + req.params.id)
+try {
+result = await cities.findByIdAndDelete( req.params.id)
+console.log("Removed " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": Error deleting ${err}}`);
+}
 };
+
 // Handle Citiese update form on PUT.
 exports.cities_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: cities update PUT' + req.params.id);
@@ -97,4 +106,17 @@ ${JSON.stringify(req.body)}`)
         res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
     }
+};
+// Handle a show one view with id specified by query
+exports.cities_view_one_Page = async function(req, res) {
+console.log("single view for id " + req.query.id)
+try{
+result = await cities.findById( req.query.id)
+res.render('citiesdetail',
+{ title: 'cities Detail', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
 };
