@@ -1,0 +1,45 @@
+extends layout
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let citiesid = toShow._id
+    - let cityname = toShow.cityname
+    - let citypopulation = toShow.citypopulation
+    - let cityrevenue = toShow.cityrevenue
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{citiesid}
+    - let actionid = "/resource/cities/" + citiesid
+    form(id='citiesForm', action= actionid, method="PUT")
+      div.form-group
+        label.citiesAttr(for='cityname') city name
+        input#cityname(type='text', name='cityname', value= cityname )
+      div.form-group
+        label.citiesAttr(for='citypopulation') City population
+        input#citypopulation(type='text', name='citypopulation', value= citypopulation )
+      div.form-group
+        label.citiesAttr(for='cityrevenue') Costume cost
+        input#cityrevenue(type='number', name='cityrevenue', value= cityrevenue )
+      input(type="submit")
+      script.
+        document.forms['citiesForm'].addEventListener('submit', (event) => {
+          event.preventDefault();
+          // TODO do something here to show user that form is being submitted
+          fetch(event.target.action, {
+            method: 'PUT',
+            body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+          })
+          .then((resp) => {
+            return resp.json(); // or resp.text() or whatever the server sends
+          })
+          .then((body) => {
+            alert("Update succeeded");
+            // TODO handle body
+          })
+          .catch((error) => {
+            // TODO handle error
+            alert("Update failed " + error);
+          });
+        });

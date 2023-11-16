@@ -1,0 +1,49 @@
+extends layout
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let citiesid = toShow._id
+    - let cityname = toShow.cityname
+    - let citypopulation = toShow.citypopulation
+    - let cityrevenue = toShow.cityrevenue
+    - let actionid = "/resource/cities/" + citiesid
+    script let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='citiesAttr mr-3') City ID is:
+          div #{citiesid}
+      div.row
+        div(class='citiesAttr mr-3') City Name is:
+          div #{cityname}
+      div.row
+        div(class='citiesAttr mr-3') City Population is:
+          div #{citypopulation}
+      div.row
+        div(class='citiesAttr mr-3') City Revenue is:
+          div #{cityrevenue}
+      button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+      button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+      script.
+        function cancel() {
+          // Go back to the home page for the cities collection
+          window.location.href='/cities'
+        }
+      script.
+        function deleteOnid() {
+          console.log("starting delete")
+          // delete first
+          fetch(actionid, {
+            method: 'DELETE' // Don't need a body for the delete
+          }).then((resp) => {
+            return resp.json(); // or resp.text() or whatever the server sends
+          }).then((body) => {
+            alert("Delete succeeded")
+            window.location.href='/cities'
+            // TODO handle body
+          }).catch((error) => {
+            // TODO handle error
+            alert("Delete failed " + error )
+          });
+        }

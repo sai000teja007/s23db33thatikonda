@@ -5,16 +5,21 @@ block content
   - let cityname = toShow.cityname
   - let citypopulation = toShow.citypopulation
   - let cityrevenue = toShow.cityrevenue
-  div
-    div.row
-      div(class='citiesAttr mr-3') cities ID is:
-        div #{citiesid}
-    div.row
-      div(class='citiesAttr mr-3') cities Type is:
-        div #{cityname}
-    div.row
-      div(class='citiesAttr mr-3') cities Size is:
-        div #{citypopulation}
-    div.row
-      div(class='citiesAttr mr-3') cities Cost is:
-        div #{cityrevenue}
+  .container
+    .row.mb-4
+      .col
+        .card
+          .card-body
+            h3.card-title City Details
+            div.row.mb-2
+              div.col-4.citiesAttr City ID:
+              div.col-8 #{citiesid}
+            div.row.mb-2
+              div.col-4.citiesAttr City Name:
+              div.col-8 #{cityname}
+            div.row.mb-2
+              div.col-4.citiesAttr City Population:
+              div.col-8 #{citypopulation}
+            div.row.mb-2
+              div.col-4.citiesAttr City Revenue:
+              div.col-8 #{cityrevenue}
