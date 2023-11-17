@@ -1,25 +1,28 @@
 extends layout
 block content
   h1= title
-  - let citiesid = toShow._id
-  - let cityname = toShow.cityname
-  - let citypopulation = toShow.citypopulation
-  - let cityrevenue = toShow.cityrevenue
-  .container
-    .row.mb-4
-      .col
-        .card
-          .card-body
-            h3.card-title City Details
-            div.row.mb-2
-              div.col-4.citiesAttr City ID:
-              div.col-8 #{citiesid}
-            div.row.mb-2
-              div.col-4.citiesAttr City Name:
-              div.col-8 #{cityname}
-            div.row.mb-2
-              div.col-4.citiesAttr City Population:
-              div.col-8 #{citypopulation}
-            div.row.mb-2
-              div.col-4.citiesAttr City Revenue:
-              div.col-8 #{cityrevenue}
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let citiesid = toShow._id
+    - let cityname = toShow.cityname
+    - let citypopulation = toShow.citypopulation
+    - let cityrevenue = toShow.cityrevenue
+    .container
+      .row.mb-4
+        .col
+          .card
+            .card-body
+              h3.card-title City Details
+              div.row.mb-2
+                div.col-4.citiesAttr City ID:
+                div.col-8 #{citiesid}
+              div.row.mb-2
+                div.col-4.citiesAttr City Name:
+                div.col-8 #{cityname}
+              div.row.mb-2
+                div.col-4.citiesAttr City Population:
+                div.col-8 #{citypopulation}
+              div.row.mb-2
+                div.col-4.citiesAttr City Revenue:
+                div.col-8 #{cityrevenue}
